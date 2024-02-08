@@ -9,7 +9,12 @@ const Register = () => {
     password: "",
   });
   const [err, setError] = useState(null);
-
+const config = {
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+  }
+};
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -18,7 +23,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4004/api//auth/register", inputs);
+      await axios.post("http://localhost:4004/api//auth/register",config, inputs);
     } catch (err) {
       setError(err.response.data);
     }
